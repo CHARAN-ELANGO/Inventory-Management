@@ -1,1 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height for vertical centering */
+}
 
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+h1 {
+    color: #333;
+    font-size: 3rem; /* Make the heading large */
+    text-align: center; /* Center the heading text */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Small padding for smaller buttons */
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 14px; /* Smaller font size for buttons */
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+form {
+    margin-bottom: 20px; /* Space below the form */
+}
+
+table {
+    width: 80%; /* Set a fixed width for the table */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Border around table cells */
+    padding: 10px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+}
+
+table th {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray background for even rows */
+}
+
+table tr:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+}
+
+button {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    padding: 10px 15px; /* Padding for button */
+    cursor: pointer; /* Change cursor to pointer */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above button */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Link color */
+}
