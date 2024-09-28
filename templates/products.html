@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Manage Products</title>
+    <title>Products</title>
 </head>
 <body>
     <h1>Products</h1>
     
     <!-- Form to add a new product -->
-    <form method="POST" action="/add_product">
-        <label for="product_name">Product Name:</label>
+    <form method="POST" action="/products">
+        <label for="product_name">Add New Product:</label>
         <input type="text" id="product_name" name="product_name" required>
         <button type="submit">Add Product</button>
     </form>
-
-    <!-- Table to display products -->
+    
     <table>
         <tr>
             <th>Product ID</th>
@@ -29,7 +28,7 @@
         </tr>
         {% endfor %}
     </table>
-
+    
     <a href="/">Back to Home</a>
 </body>
 </html>

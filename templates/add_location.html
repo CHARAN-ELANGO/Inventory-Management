@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Manage Locations</title>
+</head>
+<body>
+    <h1>Locations</h1>
+    
+    <!-- Form to add a new location -->
+    <form method="POST" action="/add_location">
+        <label for="location_name">Location Name:</label>
+        <input type="text" id="location_name" name="location_name" required>
+        <button type="submit">Add Location</button>
+    </form>
+
+    <!-- Table to display locations -->
+    <table>
+        <tr>
+            <th>Location ID</th>
+            <th>Location Name</th>
+        </tr>
+        {% for location in locations %}
+        <tr>
+            <td>{{ location.location_id }}</td>
+            <td>{{ location.location_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Inventory Management</title>
+</head>
+<body>
+    <h1>Welcome to Inventory Management</h1>
+    <div class="main">
+        <form action="/add_product" method="get">
+            <button type="submit">Manage Products</button>
+        </form>
+        <form action="/add_location" method="get">
+            <button type="submit">Add Location</button>
+        </form>
+        <form action="/add_movement" method="get">
+            <button type="submit">Add Movement</button>
+        </form>
+        <form action="/balance" method="get">
+            <button type="submit">View Balance</button>
+        </form>
+    </div>
+</body>
+</html>
