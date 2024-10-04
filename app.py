@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
-
+import mysql.connector
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1406'
+app.config['MYSQL_PASSWORD'] = '****'
 app.config['MYSQL_DB'] = 'inventory_management'
 
 mysql = MySQL(app)
@@ -108,6 +108,40 @@ def products():
     products = cursor.fetchall()
     
     return render_template('add_product.html', products=products)
+@app.route('/view_product/<int:product_id>')
+def view_product(product_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    print("==>", product_id)
+    # Fetch the product details by its ID
+    cursor.execute("SELECT * FROM Product WHERE product_id = %s", (product_id,))
+    product = cursor.fetchone()
+    
+    if not product:
+        return "Product not found", 404
+    
+    return render_template('view_product.html', product=product)
+
+@app.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    # If the form is submitted, update the product
+    if request.method == 'POST':
+        product_name = request.form['product_name']
+        
+        # Update the product in the database
+        cursor.execute("UPDATE Product SET product_name = %s WHERE product_id = %s", (product_name, product_id))
+        mysql.connection.commit()
+        return redirect('/add_product')
+    
+    # Fetch the existing product details
+    cursor.execute("SELECT * FROM Product WHERE product_id = %s", (product_id,))
+    product = cursor.fetchone()
+    
+    if not product:
+        return "Product not found", 404
+    
+    return render_template('edit_product.html', product=product)
 
 
 if __name__ == '__main__':

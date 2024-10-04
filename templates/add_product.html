@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
     <title>Manage Products</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Products</h1>
-    
+
     <!-- Form to add a new product -->
     <form method="POST" action="/add_product">
-        <label for="product_name">Product Name:</label>
-        <input type="text" id="product_name" name="product_name" required>
-        <button type="submit">Add Product</button>
+      <label for="product_name">Product Name:</label>
+      <input type="text" id="product_name" name="product_name" required />
+      <button type="submit">Add Product</button>
     </form>
 
     <!-- Table to display products -->
     <table>
-        <tr>
-            <th>Product ID</th>
-            <th>Product Name</th>
-        </tr>
-        {% for product in products %}
-        <tr>
-            <td>{{ product.product_id }}</td>
-            <td>{{ product.product_name }}</td>
-        </tr>
-        {% endfor %}
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Actions</th>
+      </tr>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.product_id }}</td>
+        <td>{{ product.product_name }}</td>
+        <td>
+          <!-- View Button -->
+          <form
+            action="/view_product/{{ product.product_id }}"
+            method="get"
+            style="display: inline"
+          >
+            <button type="submit">View</button>
+          </form>
+
+          <!-- Edit Button -->
+          <form
+            action="/edit_product/{{ product.product_id }}"
+            method="get"
+            style="display: inline"
+          >
+            <button type="submit">Edit</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
     </table>
 
     <a href="/">Back to Home</a>
-</body>
+  </body>
 </html>
