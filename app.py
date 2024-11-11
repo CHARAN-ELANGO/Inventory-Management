@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '***^'
+app.config['MYSQL_PASSWORD'] = 'Charanelangovan333@'
 app.config['MYSQL_DB'] = 'inventory_management'
 
 mysql = MySQL(app)
@@ -143,6 +143,17 @@ def edit_product(product_id):
     
     return render_template('edit_product.html', product=product)
 
-
+@app.route('/view_location/<int:location_id>')
+def view_location(location_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    #print("==>", location_id)
+    # Fetch the product details by its ID
+    cursor.execute("SELECT * FROM location WHERE location_id = %s", (location_id,))
+    location = cursor.fetchone()
+    
+    if not location:
+        return "location not found", 404
+    
+    return render_template('view_location.html', location=location)
 if __name__ == '__main__':
     app.run(debug=True)
