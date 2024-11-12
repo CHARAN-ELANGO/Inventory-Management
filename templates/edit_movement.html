@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <title>Edit Movement</title>
+  </head>
+  <body>
+    <h1>Edit Movement</h1>
+    <form method="POST" action="/edit_movement/{{ movement.movement_id }}">
+      <label for="movement.from_location">From Location:</label>
+      <input
+        type="text"
+        id="movement.from_location"
+        name="from_location"
+        value="{{ movement.from_location }}"
+        required
+      />
+      <label for="movement.to_location">To Location:</label>
+      <input
+        type="text"
+        id="movement.to_location"
+        name="to_location"
+        value="{{ movement.to_location }}"
+        required
+      />
+      <label for=" movement.product_id">Product Id:</label>
+      <input
+        type="text"
+        id="movement.product_id"
+        name="product_id"
+        value="{{ movement.product_id }}"
+        required
+      />
+      <label for="movement.qty">Quantity :</label>
+      <input
+        type="text"
+        id="movement.qty"
+        name="qty"
+        value="{{ movement.qty }}"
+        required
+      />
+
+      <button type="submit">Update Movement</button>
+    </form>
+    <a href="/" class="back-button">Back to Movements</a>
+  </body>
+</html>

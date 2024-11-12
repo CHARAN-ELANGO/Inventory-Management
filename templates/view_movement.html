@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <title>View Movements</title>
+  </head>
+  <body>
+    <h1>View Movements</h1>
+    <div class="Movements-details">
+      <p><strong>Movement ID:</strong> {{ movement.movement_id }}</p>
+      <p><strong>Movement Timestamp</strong> {{ movement.timestamp}}</p>
+      <p><strong>Movement From_location</strong> {{movement.from_location }}</p>
+      <p><strong>Movement To_location</strong> {{movement.to_location }}</p>
+      <p><strong>Movement Product_id</strong> {{movement.product_id }}</p>
+      <p><strong>Movement Qty</strong> {{movement.qty }}</p>
+  
+    </div>
+    </div>
+    </div>
+    <a href="/" class="back-button">Back to Movements</a>
+  </body>
+</html>

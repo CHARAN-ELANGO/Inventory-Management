@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
     <title>Manage Movements</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Movements</h1>
-    
+
     <!-- Form to add a new movement -->
     <form method="POST" action="/add_movement">
-        <label for="from_location">From Location (ID):</label>
-        <input type="text" id="from_location" name="from_location">
-        <label for="to_location">To Location (ID):</label>
-        <input type="text" id="to_location" name="to_location" required>
-        <label for="product_id">Product ID:</label>
-        <input type="text" id="product_id" name="product_id" required>
-        <label for="qty">Quantity:</label>
-        <input type="text" id="qty" name="qty" required>
-        <button type="submit">Add Movement</button>
+      <label for="from_location">From Location (ID):</label>
+      <input type="text" id="from_location" name="from_location" />
+      <label for="to_location">To Location (ID):</label>
+      <input type="text" id="to_location" name="to_location" required />
+      <label for="product_id">Product ID:</label>
+      <input type="text" id="product_id" name="product_id" required />
+      <label for="qty">Quantity:</label>
+      <input type="text" id="qty" name="qty" required />
+      <button type="submit">Add Movement</button>
     </form>
 
     <!-- Table to display movements -->
     <table>
-        <tr>
-            <th>Movement ID</th>
-            <th>Timestamp</th>
-            <th>From Location</th>
-            <th>To Location</th>
-            <th>Product ID</th>
-            <th>Quantity</th>
-        </tr>
-        {% for movement in movements %}
-        <tr>
-            <td>{{ movement.movement_id }}</td>
-            <td>{{ movement.timestamp }}</td>
-            <td>{{ movement.from_location }}</td>
-            <td>{{ movement.to_location }}</td>
-            <td>{{ movement.product_id }}</td>
-            <td>{{ movement.qty }}</td>
-        </tr>
-        {% endfor %}
+      <tr>
+        <th>Movement ID</th>
+        <th>Timestamp</th>
+        <th>From Location</th>
+        <th>To Location</th>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+      {% for movement in movements %}
+      <tr>
+        <td>{{ movement.movement_id }}</td>
+        <td>{{ movement.timestamp }}</td>
+        <td>{{ movement.from_location }}</td>
+        <td>{{ movement.to_location }}</td>
+        <td>{{ movement.product_id }}</td>
+        <td>{{ movement.qty }}</td>
+        <td>
+          <!-- View Button -->
+          <form
+            action="/view_movement/{{ movement.movement_id }}"
+            method="get"
+            style="display: inline"
+          >
+            <button type="submit">View</button>
+          </form>
+
+          <!-- Edit Button -->
+          <form
+            action="/edit_movement/{{ movement.movement_id }}"
+            method="get"
+            style="display: inline"
+          >
+            <button type="submit">Edit</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
     </table>
 
     <a href="/">Back to Home</a>
-</body>
+  </body>
 </html>

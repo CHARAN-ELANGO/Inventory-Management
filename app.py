@@ -155,5 +155,68 @@ def view_location(location_id):
         return "location not found", 404
     
     return render_template('view_location.html', location=location)
+
+@app.route('/edit_location/<int:location_id>', methods=['GET', 'POST'])
+def edit_location(location_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    # If the form is submitted, update the product
+    if request.method == 'POST':
+        location_name = request.form['location_name']
+        
+        # Update the product in the database
+        cursor.execute("UPDATE location SET location_name = %s WHERE location_id = %s", (location_name, location_id))
+        mysql.connection.commit()
+        return redirect('/add_location')
+    
+    # Fetch the existing product details
+    cursor.execute("SELECT * FROM location WHERE location_id = %s", (location_id,))
+    location = cursor.fetchone()
+    
+    if not location:
+        return "location not found", 404
+    
+    return render_template('edit_location.html', location=location)
+
+
+@app.route('/view_movement/<int:movement_id>')
+def view_movement(movement_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    print("==>", movement_id)
+    # Fetch the product details by its ID
+    cursor.execute("SELECT * FROM productmovement WHERE movement_id = %s", (movement_id,))
+    movement = cursor.fetchone()
+    
+    if not movement:
+        return "movement not found", 404
+    
+    return render_template('view_movement.html', movement=movement)
+
+@app.route('/edit_movement/<int:movement_id>', methods=['GET', 'POST'])
+def edit_movement(movement_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    # If the form is submitted, update the product
+    if request.method == 'POST':
+        from_location = request.form['from_location']
+        to_location = request.form['to_location']
+        product_id = request.form['product_id']
+        qty = request.form['qty']
+        
+        
+        # Update the product in the database
+        cursor.execute("UPDATE productmovement SET from_location = %s,to_location=%s,product_id=%s,qty=%s WHERE movement_id = %s", (from_location,to_location,product_id,qty, movement_id))
+        mysql.connection.commit()
+        return redirect('/add_movement')
+    
+    # Fetch the existing product details
+    cursor.execute("SELECT * FROM productmovement WHERE movement_id = %s", (movement_id,))
+    movement = cursor.fetchone()
+    
+    if not movement:
+        return "movement not found", 404
+    
+    return render_template('edit_movement.html', movement=movement)
+
 if __name__ == '__main__':
     app.run(debug=True)
